@@ -26,9 +26,47 @@ public class TransactionTest {
         transactionPage.moneyTransaction(transaction, DataHelper.FistCard());
         val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
         val balanceSecondCardAfter = dashboardPage.getSecondCardBalance();
-        assertEquals((balanceFistCardBefore-transaction), balanceFistCardAfter);
-        assertEquals((balanceSecondCardBefore+transaction), balanceSecondCardAfter);
+        assertEquals((balanceFistCardBefore - transaction), balanceFistCardAfter);
+        assertEquals((balanceSecondCardBefore + transaction), balanceSecondCardAfter);
+    }
 
-
+    @Test
+    void shouldTransactionOfSecondCardToFist() {
+        Configuration.holdBrowserOpen = true;
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        val dashboardPage = verificationPage.verify(verificationCode);
+        val balanceFistCardBefore = dashboardPage.getFirstCardBalance();
+        val balanceSecondCardBefore = dashboardPage.getSecondCardBalance();
+        val transactionPage = dashboardPage.firstCard();
+        int transaction = 400;
+        transactionPage.moneyTransaction(transaction, DataHelper.SecondCard());
+        val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
+        val balanceSecondCardAfter = dashboardPage.getSecondCardBalance();
+        assertEquals((balanceFistCardBefore + transaction), balanceFistCardAfter);
+        assertEquals((balanceSecondCardBefore - transaction), balanceSecondCardAfter);
+    }
+    @Test
+    void shouldTransactionOfSecondCardToFistMoreThenHaveInBalance() {
+        Configuration.holdBrowserOpen = true;
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        val dashboardPage = verificationPage.verify(verificationCode);
+        val balanceFistCardBefore = dashboardPage.getFirstCardBalance();
+        val balanceSecondCardBefore = dashboardPage.getSecondCardBalance();
+        val transactionPage = dashboardPage.firstCard();
+        int transaction = 8000;
+        transactionPage.moneyTransaction(transaction, DataHelper.SecondCard());
+        transactionPage.errorPage();
+        val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
+        val balanceSecondCardAfter = dashboardPage.getSecondCardBalance();
+        assertEquals((balanceFistCardBefore), balanceFistCardAfter);
+        assertEquals((balanceSecondCardBefore), balanceSecondCardAfter);
     }
 }
