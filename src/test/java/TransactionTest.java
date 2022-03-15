@@ -14,9 +14,9 @@ public class TransactionTest {
     void shouldTransactionOfFistCardToSecond() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
-        var LoginPage = new LoginPage();
+        var loginPage = new LoginPage();
         var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = LoginPage.validLogin(authInfo);
+        var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         val dashboardPage = verificationPage.verify(verificationCode);
         val balanceFistCardBefore = dashboardPage.getFirstCardBalance();

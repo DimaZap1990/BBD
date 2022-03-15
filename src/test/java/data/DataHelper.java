@@ -38,10 +38,10 @@ public class DataHelper {
 
     public static CardsInfo FistCard() {
 
-        return new CardsInfo("5559 0000 0000 0002");
+        return new CardsInfo("5559 0000 0000 0001");
     }
 
     public static CardsInfo SecondCard() {
-        return new CardsInfo("5559 0000 0000 0001");
+        return new CardsInfo("5559 0000 0000 0002");
     }
 }
