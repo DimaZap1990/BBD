@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import data.DataHelper;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class CardPage {
@@ -14,8 +15,8 @@ public class CardPage {
     private SelenideElement error = $("[data-test-id=error-notification]");
 
     public CardPage(){
-        transferButton.shouldBe(Condition.visible);
-        cancelButton.shouldBe(Condition.visible);
+        transferButton.shouldBe(visible);
+        cancelButton.shouldBe(visible);
     }
     public DashboardPage moneyTransaction(int transaction, DataHelper.CardsInfo cardsInfo){
         amountField.setValue(String.valueOf(transaction));
@@ -25,6 +26,6 @@ public class CardPage {
 
     }
     public void errorPage(){
-        error.shouldBe(Condition.visible);
+        error.shouldBe(visible);
     }
 }
