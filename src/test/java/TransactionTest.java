@@ -22,7 +22,7 @@ public class TransactionTest {
         val balanceFistCardBefore = dashboardPage.getFirstCardBalance();
         val balanceSecondCardBefore = dashboardPage.getSecondCardBalance();
         val transactionPage = dashboardPage.secondCard();
-        int transaction = 200;
+        int transaction = 2000;
         transactionPage.moneyTransaction(transaction, DataHelper.FistCard());
         val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
         val balanceSecondCardAfter = dashboardPage.getSecondCardBalance();
@@ -42,7 +42,7 @@ public class TransactionTest {
         val balanceFistCardBefore = dashboardPage.getFirstCardBalance();
         val balanceSecondCardBefore = dashboardPage.getSecondCardBalance();
         val transactionPage = dashboardPage.firstCard();
-        int transaction = 400;
+        int transaction = 12000;
         transactionPage.moneyTransaction(transaction, DataHelper.SecondCard());
         val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
         val balanceSecondCardAfter = dashboardPage.getSecondCardBalance();
@@ -61,7 +61,7 @@ public class TransactionTest {
         val balanceFistCardBefore = dashboardPage.getFirstCardBalance();
         val balanceSecondCardBefore = dashboardPage.getSecondCardBalance();
         val transactionPage = dashboardPage.firstCard();
-        int transaction = 8000;
+        int transaction = 5000;
         transactionPage.moneyTransaction(transaction, DataHelper.SecondCard());
         transactionPage.errorPage();
         val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
