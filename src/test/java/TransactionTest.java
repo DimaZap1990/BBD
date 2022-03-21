@@ -42,7 +42,26 @@ public class TransactionTest {
         val balanceFistCardBefore = dashboardPage.getFirstCardBalance();
         val balanceSecondCardBefore = dashboardPage.getSecondCardBalance();
         val transactionPage = dashboardPage.firstCard();
-        int transaction = 12000;
+        int transaction = 2000;
+        transactionPage.moneyTransaction(transaction, DataHelper.SecondCard());
+        val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
+        val balanceSecondCardAfter = dashboardPage.getSecondCardBalance();
+        assertEquals((balanceFistCardBefore + transaction), balanceFistCardAfter);
+        assertEquals((balanceSecondCardBefore - transaction), balanceSecondCardAfter);
+    }
+    @Test
+    void shouldSecondCardToZeroBalance() {
+        Configuration.holdBrowserOpen = true;
+        open("http://localhost:9999");
+        var loginPage = new LoginPage();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        val dashboardPage = verificationPage.verify(verificationCode);
+        val balanceFistCardBefore = dashboardPage.getFirstCardBalance();
+        val balanceSecondCardBefore = dashboardPage.getSecondCardBalance();
+        val transactionPage = dashboardPage.firstCard();
+        int transaction = 10000;
         transactionPage.moneyTransaction(transaction, DataHelper.SecondCard());
         val balanceFistCardAfter = dashboardPage.getFirstCardBalance();
         val balanceSecondCardAfter = dashboardPage.getSecondCardBalance();
